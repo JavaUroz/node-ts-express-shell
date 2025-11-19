@@ -1,7 +1,5 @@
 import { compareSync, genSaltSync, hashSync } from 'bcryptjs';
 
-
-
 export const bcryptAdapter = {
 
   hash: (password: string) => {
@@ -12,5 +10,4 @@ export const bcryptAdapter = {
   compare: (password:string, hashed: string) => {
     return compareSync(password, hashed);
   }
-
 }

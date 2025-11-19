@@ -1,8 +1,5 @@
 import { regularExps } from '../../../config';
 
-
-
-
 export class LoginUserDto {
 
   private constructor(
@@ -19,8 +16,5 @@ export class LoginUserDto {
     if ( password.length < 6 ) return ['Password too short'];
 
     return [undefined, new LoginUserDto(email, password)];
-
   }
-
-
 }

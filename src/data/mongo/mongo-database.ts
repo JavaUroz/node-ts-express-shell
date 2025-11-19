@@ -1,12 +1,9 @@
 import mongoose from 'mongoose';
 
-
-
 interface Options {
   mongoUrl: string;
   dbName: string;
 }
-
 
 export class MongoDatabase {
 
@@ -24,13 +21,5 @@ export class MongoDatabase {
       console.log('Mongo connection error');
       throw error;
     }
-
   }
-
-
 }
-
-
-
-
-
