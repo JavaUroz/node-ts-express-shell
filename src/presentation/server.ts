@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import path from 'path';
+import fileUpload from 'express-fileupload';
 
 interface Options {
   port: number;
@@ -25,18 +26,21 @@ export class Server {
   async start() {    
 
     //* Middlewares
-    this.app.use( express.json() ); // raw
-    this.app.use( express.urlencoded({ extended: true }) ); // x-www-form-urlencoded
+    this.app.use(express.json()); // raw
+    this.app.use(express.urlencoded({ extended: true })); // x-www-form-urlencoded
+    this.app.use(fileUpload({
+      limits: { fileSize: 50 * 1024 * 1024 }
+    }));
 
     //* Public Folder
-    this.app.use( express.static( this.publicPath ) );
+    this.app.use(express.static( this.publicPath));
 
     //* Routes
-    this.app.use( this.routes );
+    this.app.use(this.routes);
 
     //* SPA
     this.app.get('*', (req, res) => {
-      const indexPath = path.join( __dirname + `../../../${ this.publicPath }/index.html` );
+      const indexPath = path.join(__dirname + `../../../${ this.publicPath }/index.html`);
       res.sendFile(indexPath);
     });    
 
